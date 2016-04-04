@@ -14,6 +14,14 @@
     var MaxMistakes = 7;
 
 
+    function flash() {
+        $('body').addClass('flash');
+        setTimeout(function () {
+            $('body').removeClass('flash');
+        }, 150);
+    }
+
+
     function update() {
         var wordEl = $('#word');
         wordEl.empty();
@@ -30,15 +38,15 @@
             wordEl.append(chEl);
         });
         if (badChars.length > 0) {
-            $('#bad-characters').html(badChars.join(', '));
+            $('#bad-characters').html(badChars.join(' '));
         }
         $('#mistake-' + mistakes).removeClass('invisible');
         if (mistakes === MaxMistakes) {
-            $('#message').text('Du hast verloren! Das gesuchte Wort war ' + word + '.');
+            $('#message').text('Du hast verloren! Das gesuchte Wort war "' + word + '".');
         }
         else {
             if (won) {
-                $('#message').text('Du hast gewonnen!');
+                $('#message').text('Yay! - Du hast gewonnen!');
             }
         }
     }
@@ -56,7 +64,7 @@
                 if (badChars.indexOf(c) < 0) {
                     badChars.push(c);
                     ++mistakes;
-                    console.log(mistakes + ' Fehler.');
+                    flash();
                 }
             }
             update();

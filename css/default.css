@@ -23,7 +23,6 @@ h1 {
 
 p {
     margin-top: 12pt;
-    margin-bottom: 12pt;
 }
 
 #main {
@@ -34,10 +33,13 @@ p {
 #playground {
     margin-top: 12pt;
     margin-bottom: 12pt;
+    color: #ddd;
 }
 
 #word {
     margin-bottom: 12pt;
+    letter-spacing: 2pt;
+    color: #0e0;
 }
 
 #message {
@@ -45,9 +47,8 @@ p {
     margin-bottom: 12pt;
 }
 
-#word > span {
-    margin-right: 1pt;
-    color: #ccc;
+#bad-characters {
+    color: #666;
 }
 
 button {
@@ -61,4 +62,86 @@ td[id^=mistake-] {
 
 .invisible {
     visibility: hidden;
+}
+
+
+.flash {
+    animation-duration: 100ms;
+    animation-name: flash;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 100ms;
+    -webkit-animation-name: flash;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-direction: normal;
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-duration: 100ms;
+    -moz-animation-name: flash;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-direction: normal;
+    -moz-animation-timing-function: ease-in-out;
+}
+
+@keyframes flash {
+    0% {
+        background-color: #222;
+    }
+    25% {
+        background-color: #f00;
+    }
+    50% {
+        background-color: #fff;
+    }
+    75% {
+        background-color: #f00;
+    }
+    90% {
+        background-color: #100;
+    }
+    100% {
+        background-color: #222;
+    }
+}
+
+@-webkit-keyframes flash {
+    0% {
+        background-color: #222;
+    }
+    25% {
+        background-color: #f00;
+    }
+    50% {
+        background-color: #fff;
+    }
+    75% {
+        background-color: #f00;
+    }
+    90% {
+        background-color: #100;
+    }
+    100% {
+        background-color: #222;
+    }
+}
+
+@-moz-keyframes flash {
+    0% {
+        background-color: #222;
+    }
+    25% {
+        background-color: #f00;
+    }
+    50% {
+        background-color: #fff;
+    }
+    75% {
+        background-color: #f00;
+    }
+    90% {
+        background-color: #100;
+    }
+    100% {
+        background-color: #222;
+    }
 }
