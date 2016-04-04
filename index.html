@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel="stylesheet" href="css/default.css" />
+    <script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="js/hangman.js"></script>
+</head>
+<body>
+    <div id="main">
+        <h1>Hangman</h1>
+        <table id="playground">
+            <tr><td> </td><td>+</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>+</td><td>-</td><td>-</td><td> </td></tr>
+            <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td id="mistake-1">|</td><td> </td><td> </td><td> </td></tr>
+            <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td id="mistake-2">O</td><td> </td><td> </td><td> </td></tr>
+            <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td id="mistake-4">/</td><td id="mistake-3">|</td><td id="mistake-5">\</td><td> </td><td> </td></tr>
+            <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td id="mistake-6">/</td><td> </td><td id="mistake-7">\</td><td> </td><td> </td></tr>
+            <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+            <tr><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+        </table>
+        <p>
+            Verb?
+            <span id="word"></span>
+        </p>
+        <p>Falsche Buchstaben:
+            <div id="bad-characters"></div>
+        </p>
+        <div id="message"></div>
+    </div>
+</body>
+</html>

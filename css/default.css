@@ -1,0 +1,64 @@
+﻿@charset 'utf-8';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-family: 'DejaVu Sans Mono', monospace;
+}
+
+body {
+    background-color: #222;
+    color: #999;
+    padding: 12pt;
+    font-family: 'DejaVu Sans Mono', monospace;
+}
+
+h1 {
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+p {
+    margin-top: 12pt;
+    margin-bottom: 12pt;
+}
+
+#main {
+    margin: 0 auto;
+    width: 320px;
+}
+
+#playground {
+    margin-top: 12pt;
+    margin-bottom: 12pt;
+}
+
+#word {
+    margin-bottom: 12pt;
+}
+
+#message {
+    margin-top: 12pt;
+    margin-bottom: 12pt;
+}
+
+#word > span {
+    margin-right: 1pt;
+    color: #ccc;
+}
+
+button {
+    padding: 4pt 8pt;
+    font-weight: bold;
+}
+
+td[id^=mistake-] {
+    color: #c00;
+}
+
+.invisible {
+    visibility: hidden;
+}
