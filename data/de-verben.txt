@@ -540,7 +540,7 @@ berücksichtigen
 besamen
 bescheinigen
 beschleunigen
-beschrieben.
+beschrieben
 beschriften
 beschränken
 beschuldigen
@@ -1770,7 +1770,7 @@ heulen
 hexen
 hierbehalten
 hierbleiben
-hierher?
+hierher
 hierherbitten
 hierherkommen
 hierlassen
@@ -3004,7 +3004,6 @@ reduzieren
 referenzieren
 referieren
 reffen
-regelmäßig)
 regeln
 regen
 regieren
@@ -4438,7 +4437,6 @@ zündeln
 zünden
 züngeln
 zürnen
-Änderungen
 ächten
 ächzen
 ähneln
