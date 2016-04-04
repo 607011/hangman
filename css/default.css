@@ -13,12 +13,14 @@ body {
     color: #999;
     padding: 12pt;
     font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 12pt;
 }
 
 h1 {
     color: #ccc;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    font-size: 26pt;
+    border-bottom: 3pt solid #ccc;
 }
 
 p {
@@ -31,8 +33,8 @@ p {
 }
 
 #playground {
-    margin-top: 12pt;
-    margin-bottom: 12pt;
+    margin-top: 24pt;
+    margin-bottom: 24pt;
     color: #ddd;
 }
 
@@ -64,6 +66,16 @@ td[id^=mistake-] {
     visibility: hidden;
 }
 
+.won {
+    color: #f8f8f8;
+}
+
+#help {
+    margin-top: 32pt;
+    border-top: 1px solid #999;
+    white-space: pre;
+    font-size: 8pt;
+}
 
 .flash {
     animation-duration: 100ms;

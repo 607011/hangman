@@ -12,7 +12,8 @@
     var badChars = [];
     var mistakes = 0;
     var MaxMistakes = 7;
-
+    var hinted = false;
+    var endOfGame = false;
 
     function flash() {
         $('body').addClass('flash');
@@ -24,29 +25,27 @@
 
     function update() {
         var wordEl = $('#word');
-        wordEl.empty();
-        var won = true;
-        $.each(wordChars, function (i, c) {
-            var chEl = $('<span></span>');
-            if (selectedChars.indexOf(c) >= 0) {
-                chEl.text(c);
-            }
-            else {
-                chEl.text('_');
-                won = false;
-            }
-            wordEl.append(chEl);
-        });
+        var guessed = $.map(wordChars, function (c) {
+            return selectedChars.indexOf(c) < 0
+                ? '_'
+                : c;
+        }).join('');
+        wordEl.text(guessed);
         if (badChars.length > 0) {
             $('#bad-characters').html(badChars.join(' '));
         }
         $('#mistake-' + mistakes).removeClass('invisible');
+        var msgEl = $('#message');
         if (mistakes === MaxMistakes) {
-            $('#message').text('Du hast verloren! Das gesuchte Wort war "' + word + '".');
+            endOfGame = true;
+            msgEl.text('Du hast verloren! Das gesuchte Wort war "' + word + '".');
         }
         else {
-            if (won) {
-                $('#message').text('Yay! - Du hast gewonnen!');
+            if (guessed.indexOf('_') < 0) {
+                endOfGame = true;
+                msgEl.addClass('won').text(hinted
+                    ? 'Geschafft! Das nächste Mal schaffst du es ohne Hilfe, oder?'
+                    : 'Yay! - Du hast gewonnen!');
             }
         }
     }
@@ -54,20 +53,36 @@
 
     function onKeyPressed(e) {
         var c = String.fromCharCode(e.charCode).toLowerCase();
-        if (AllowedChars.indexOf(c) >= 0) {
-            if (wordChars.indexOf(c) >= 0) {
-                if (selectedChars.indexOf(c) < 0) {
-                    selectedChars.push(c);
+        if (!endOfGame) {
+            if (c === '?') {
+                hinted = true;
+                for (var i = 0; i < wordChars.length; ++i) {
+                    if (selectedChars.indexOf(wordChars[i]) < 0) {
+                        c = wordChars[i];
+                        break;
+                    }
                 }
             }
-            else {
-                if (badChars.indexOf(c) < 0) {
-                    badChars.push(c);
-                    ++mistakes;
-                    flash();
+            if (AllowedChars.indexOf(c) >= 0) {
+                if (wordChars.indexOf(c) >= 0) {
+                    if (selectedChars.indexOf(c) < 0) {
+                        selectedChars.push(c);
+                    }
                 }
+                else {
+                    if (badChars.indexOf(c) < 0) {
+                        badChars.push(c);
+                        ++mistakes;
+                        flash();
+                    }
+                }
+                update();
             }
-            update();
+        }
+        else {
+            if (c === ' ') {
+                newGame();
+            }
         }
     }
 
@@ -76,18 +91,20 @@
         selectedChars = [];
         badChars = [];
         mistakes = 0;
+        endOfGame = false;
+        hinted = false;
+        $('#message').removeClass('won').empty();
         $('[id^=mistake-]').addClass('invisible');
         $('#bad-characters').text('bislang keine ;-)');
         var wordLen = Math.floor(Math.random() * (Verbs.length - 4)) + 4;
         word = Verbs[wordLen][Math.floor(Math.random() * Verbs[wordLen].length)];
         wordChars = word.split('');
-        console.log(wordLen, wordChars);
         update();
     }
 
 
     function doInit() {
-        console.log("%c c't %c Hangman v0.9 patch level 0", 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
+        console.log("%c c't %c Hangman v1.0 BETA patch level 2", 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
         console.log("%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG.\nAlle Rechte vorbehalten.", 'color: #1358A3; font-weight: bold;');
         $(window).on({
             keypress: onKeyPressed
