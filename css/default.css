@@ -121,7 +121,7 @@ p {
 }
 
 button {
-    padding: 4px 8px;
+    padding: 0 1em;
     font-weight: bold;
 }
 
@@ -223,6 +223,62 @@ td[id^=mistake-] {
     }
     90% {
         background-color: #100;
+    }
+    100% {
+        background-color: #222;
+    }
+}
+
+
+
+.micro-flash {
+    animation-duration: 250ms;
+    animation-name: micro-flash;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 250ms;
+    -webkit-animation-name: micro-flash;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-direction: normal;
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-duration: 250ms;
+    -moz-animation-name: micro-flash;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-direction: normal;
+    -moz-animation-timing-function: ease-in-out;
+}
+
+@keyframes micro-flash {
+    0% {
+        background-color: #222;
+    }
+    50% {
+        background-color: #666;
+    }
+    100% {
+        background-color: #222;
+    }
+}
+
+@-webkit-keyframes micro-flash {
+    0% {
+        background-color: #222;
+    }
+    50% {
+        background-color: #666;
+    }
+    100% {
+        background-color: #222;
+    }
+}
+
+@-moz-keyframes micro-flash {
+    0% {
+        background-color: #222;
+    }
+    50% {
+        background-color: #666;
     }
     100% {
         background-color: #222;

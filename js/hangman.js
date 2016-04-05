@@ -29,6 +29,14 @@
     }
 
 
+    function microFlash() {
+        $('body').addClass('micro-flash');
+        setTimeout(function () {
+            $('body').removeClass('micro-flash');
+        }, 150);
+    }
+
+
     function update() {
         var wordEl = $('#word');
         var guessed = wordChars.map(function (c) {
@@ -108,6 +116,7 @@
 
 
     function newGame(newDifficulty) {
+        microFlash();
         difficulty = newDifficulty;
         document.location.hash = '#difficulty=' + difficulty;
         selectedChars = [];
@@ -190,6 +199,20 @@
             keypress: onKeyPressed
         });
         $('#virtual-keyboard button').click(keyClicked);
+        $('#new-button').click(function () {
+            var e = jQuery.Event("keypress");
+            e.keyCode = 0x20;
+            e.which = 0x20;
+            e.charCode = 0x20;
+            $(window).trigger(e);
+        });
+        $('#hint-button').click(function () {
+            var e = jQuery.Event("keypress");
+            e.keyCode = 0x3f;
+            e.which = 0x3f;
+            e.charCode = 0x3f;
+            $(window).trigger(e);
+        });
         $('#message-container').click(function () {
             newGame(difficulty);
         });
