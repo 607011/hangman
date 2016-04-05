@@ -33,7 +33,7 @@
         $('body').addClass('micro-flash');
         setTimeout(function () {
             $('body').removeClass('micro-flash');
-        }, 150);
+        }, 250);
     }
 
 

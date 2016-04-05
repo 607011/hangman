@@ -42,7 +42,8 @@ p {
 
 #playground {
     margin: 8px 0;
-    color: #ddd;
+    color: #eee;
+    font-weight: bold;
 }
 
 #word {
@@ -153,17 +154,17 @@ td[id^=mistake-] {
     animation-name: flash;
     animation-iteration-count: 1;
     animation-direction: normal;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: ease;
     -webkit-animation-duration: 100ms;
     -webkit-animation-name: flash;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-direction: normal;
-    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease;
     -moz-animation-duration: 100ms;
     -moz-animation-name: flash;
     -moz-animation-iteration-count: 1;
     -moz-animation-direction: normal;
-    -moz-animation-timing-function: ease-in-out;
+    -moz-animation-timing-function: ease;
 }
 
 @keyframes flash {
@@ -232,21 +233,21 @@ td[id^=mistake-] {
 
 
 .micro-flash {
-    animation-duration: 250ms;
+    animation-duration: 100ms;
     animation-name: micro-flash;
     animation-iteration-count: 1;
     animation-direction: normal;
-    animation-timing-function: ease-in-out;
-    -webkit-animation-duration: 250ms;
+    animation-timing-function: ease;
+    -webkit-animation-duration: 100ms;
     -webkit-animation-name: micro-flash;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-direction: normal;
-    -webkit-animation-timing-function: ease-in-out;
-    -moz-animation-duration: 250ms;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-duration: 100ms;
     -moz-animation-name: micro-flash;
     -moz-animation-iteration-count: 1;
     -moz-animation-direction: normal;
-    -moz-animation-timing-function: ease-in-out;
+    -moz-animation-timing-function: ease;
 }
 
 @keyframes micro-flash {
