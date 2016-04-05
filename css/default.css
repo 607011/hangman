@@ -46,8 +46,8 @@ p {
 }
 
 #word {
-    margin-bottom: 12pt;
-    letter-spacing: 2pt;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
     color: #0e0;
 }
 
@@ -107,14 +107,17 @@ p {
     bottom: 0;
     left: 0;
     z-index: 9;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(20, 20, 20, 0.85);
 }
 
 #message {
     margin: 15% auto;
-    font-size: 22px;
+    font-size: 24px;
     max-width: 640px;
     padding: 2em;
+    font-weight: bold;
+    text-shadow: rgba(255, 255, 255, 0.6) 0 0 10px;
+    text-align: center;
 }
 
 button {
@@ -123,11 +126,14 @@ button {
 }
 
 td[id^=mistake-] {
-    color: #c00;
+    color: #f00;
+    text-shadow: #f33 0 0 10px;
 }
 
 .invisible {
-    transition: opacity 1250ms;
+    transition: all 250ms;
+    -webkit-transition: all 250ms;
+    -moz-transition: all 250ms;
     opacity: 0;
     visibility: hidden;
 }

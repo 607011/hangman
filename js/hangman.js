@@ -37,9 +37,6 @@
                 : c;
         }).join('');
         wordEl.text(guessed);
-        if (badChars.length > 0) {
-            $('#bad-characters').html(badChars.join(' '));
-        }
         $('#mistake-' + mistakes).removeClass('invisible');
         var msgEl = $('#message');
         if (mistakes === MaxMistakes) {
@@ -50,9 +47,9 @@
         else {
             if (guessed.indexOf('_') < 0) {
                 endOfGame = true;
-                msgEl.addClass('won').text(cheated
-                    ? 'Geschafft! Das nächste Mal kriegst du es ohne Hilfe hin, oder?'
-                    : 'Yay! - Du hast gewonnen!');
+                msgEl.addClass('won').html(cheated
+                    ? 'Geschafft! &ldquo;' + word + '&rdquo; ist das richtige Wort! Das nächste Mal bekommst du es ohne Hilfe hin, oder?'
+                    : 'Yay! &ndash; &ldquo;' + word + '&rdquo; ist das richtige Wort!');
                 showMessageContainer();
             }
         }
