@@ -108,6 +108,7 @@
 
     function wordsLoaded(data) {
         var words = data.split("\n");
+        $('#n-verbs').text(words.length);
         var histo = {};
         var nChars = 0;
         words.forEach(function (word) {
