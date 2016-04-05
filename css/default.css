@@ -145,9 +145,13 @@ td[id^=mistake-] {
 }
 
 #help {
-    margin-top: 8px;
-    white-space: pre;
-    font-size: 11px;
+    margin-top: 16px;
+    font-size: smaller;
+}
+
+footer {
+    margin-top: 44px;
+    font-size: smaller;
 }
 
 .flash {
