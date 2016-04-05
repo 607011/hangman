@@ -1,6 +1,7 @@
 ﻿var Hangman = (function ($, window) {
     'use strict';
 
+    var Exclamations = ['Yay', 'Prima', 'Super', 'Klasse', 'Gratulation', 'Wouw', 'Toll', 'Dufte', 'Ausgezeichnet', 'Gewonnen'];
     var MaxMistakes = 7;
 
     var wordsByDifficulty = [];
@@ -49,17 +50,15 @@
         var msgEl = $('#message');
         if (mistakes === MaxMistakes) {
             endOfGame = true;
-            msgEl.text('Du hast verloren! Das gesuchte Wort war "' + word + '".');
+            msgEl.html('Du hast leider verloren! Das gesuchte Wort war &ldquo;' + word + '&rdquo;.');
             showMessageContainer();
         }
-        else {
-            if (guessed.indexOf('_') < 0) {
-                endOfGame = true;
-                msgEl.addClass('won').html(cheated
-                    ? 'Geschafft! &ldquo;' + word + '&rdquo; ist das richtige Wort! Das nächste Mal bekommst du es ohne Hilfe hin, oder?'
-                    : 'Yay! &ndash; &ldquo;' + word + '&rdquo; ist das richtige Wort!');
-                showMessageContainer();
-            }
+        else if (guessed.indexOf('_') < 0) {
+            endOfGame = true;
+            msgEl.addClass('won').html(cheated
+                ? 'Geschafft! &ldquo;' + word + '&rdquo; ist das richtige Wort! Das nächste Mal bekommst du es ohne Hilfe hin, oder?'
+                : (Exclamations[Math.floor(Math.random()*Exclamations.length)]) + '! &ndash; &ldquo;' + word + '&rdquo; ist das richtige Wort!');
+            showMessageContainer();
         }
     }
 

@@ -109,6 +109,7 @@ p {
     left: 0;
     z-index: 9;
     background-color: rgba(20, 20, 20, 0.85);
+    cursor: pointer;
 }
 
 #message {
