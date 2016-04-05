@@ -1,7 +1,6 @@
 ﻿var Hangman = (function ($, window) {
     'use strict';
 
-    var AllowedChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ö', 'ü'];
     var wordsByDifficulty = [];
     var difficulty = 5;
     var minDifficulty;
@@ -127,7 +126,6 @@
         $('#message').empty();
         $('#message-container').removeClass().addClass('invisible');
         $('[id^=mistake-]').addClass('invisible');
-        $('#bad-characters').text('bislang keine ;-)');
         var dIdx = difficulty - 1 + minDifficulty;
         var wIdx = Math.floor(Math.random() * wordsByDifficulty[dIdx].length)
         word = wordsByDifficulty[dIdx][wIdx];
@@ -144,6 +142,7 @@
 
 
     function wordsLoaded(data) {
+        $('#message-container').empty().addClass('invisible');
         var words = data.split("\n").map(function (word) {
             return word.replace('ß', 'ss');
         });
@@ -192,6 +191,13 @@
     }
 
 
+    function newKeypressEvent(charCode) {
+        var e = jQuery.Event("keypress");
+        e.keyCode = e.which = e.charCode = charCode;
+        return e;
+    }
+
+
     function doInit() {
         console.log("%c c't %c Hangman v1.0.5", 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
         console.log("%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG.\nAlle Rechte vorbehalten.", 'color: #1358A3; font-weight: bold;');
@@ -200,18 +206,10 @@
         });
         $('#virtual-keyboard button').click(keyClicked);
         $('#new-button').click(function () {
-            var e = jQuery.Event("keypress");
-            e.keyCode = 0x20;
-            e.which = 0x20;
-            e.charCode = 0x20;
-            $(window).trigger(e);
+            $(window).trigger(newKeypressEvent(0x20));
         });
         $('#hint-button').click(function () {
-            var e = jQuery.Event("keypress");
-            e.keyCode = 0x3f;
-            e.which = 0x3f;
-            e.charCode = 0x3f;
-            $(window).trigger(e);
+            $(window).trigger(newKeypressEvent(0x3f));
         });
         $('#message-container').click(function () {
             newGame(difficulty);
