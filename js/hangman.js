@@ -1,6 +1,8 @@
 ﻿var Hangman = (function ($, window) {
     'use strict';
 
+    var MaxMistakes = 7;
+
     var wordsByDifficulty = [];
     var difficulty = 5;
     var minDifficulty;
@@ -10,7 +12,6 @@
     var selectedChars = [];
     var badChars = [];
     var mistakes = 0;
-    var MaxMistakes = 7;
     var cheated = false;
     var endOfGame = false;
 
@@ -115,7 +116,6 @@
 
 
     function newGame(newDifficulty) {
-        microFlash();
         difficulty = newDifficulty;
         document.location.hash = '#difficulty=' + difficulty;
         selectedChars = [];
@@ -123,6 +123,7 @@
         mistakes = 0;
         endOfGame = false;
         cheated = false;
+        microFlash();
         $('#message').empty();
         $('#message-container').removeClass().addClass('invisible');
         $('[id^=mistake-]').addClass('invisible');
@@ -142,7 +143,6 @@
 
 
     function wordsLoaded(data) {
-        $('#message-container').empty().addClass('invisible');
         var words = data.split("\n").map(function (word) {
             return word.replace('ß', 'ss');
         });
