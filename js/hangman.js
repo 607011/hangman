@@ -109,7 +109,7 @@
     }
 
 
-    function keyClicked() {
+    function keyButtonClicked() {
         selectChar($(this).text());
     }
 
@@ -197,18 +197,23 @@
     }
 
 
+    function typeKey(c) {
+        $(window).trigger(newKeypressEvent(c.charCodeAt()));
+    }
+
+
     function doInit() {
-        console.log("%c c't %c Hangman v1.0.5", 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
+        console.log("%c c't %c Hangman v1.0.6", 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
         console.log("%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG.\nAlle Rechte vorbehalten.", 'color: #1358A3; font-weight: bold;');
         $(window).on({
             keypress: onKeyPressed
         });
-        $('#virtual-keyboard button').click(keyClicked);
+        $('#virtual-keyboard button').click(keyButtonClicked);
         $('#new-button').click(function () {
-            $(window).trigger(newKeypressEvent(0x20));
+            typeKey(' ');
         });
         $('#hint-button').click(function () {
-            $(window).trigger(newKeypressEvent(0x3f));
+            typeKey('?');
         });
         $('#message-container').click(function () {
             newGame(difficulty);
