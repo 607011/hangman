@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="de" />
@@ -12,9 +12,11 @@
     <title>Galgenmännchen</title>
 </head>
 <body>
+    <div id="message-container" class="invisible">
+        <div id="message"></div>
+    </div>
     <div id="main">
         <h1>Galgenmännchen</h1>
-        Schwierigkeitsgrad: <select id="difficulties"></select>
         <table id="playground">
             <tbody>
                 <tr><td> </td><td>+</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>+</td><td>-</td><td>-</td><td> </td></tr>
@@ -26,28 +28,39 @@
                 <tr><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
             </tbody>
         </table>
-        <p>
-            <span id="word-type"></span>?
+        <p id="word-container">
+            ?
             <span id="word"></span>
         </p>
-        <p>Falsche Buchstaben:
-            <div id="bad-characters"></div>
+
+        <div id="virtual-keyboard">
+            <div>
+                <button>q</button><button>w</button><button>e</button><button>r</button><button>t</button><button>z</button><button>u</button><button>i</button><button>o</button><button>p</button><button>ü</button>
+            </div>
+            <div>
+                <button>a</button><button>s</button><button>d</button><button>f</button><button>g</button><button>h</button><button>j</button><button>k</button><button>l</button><button>ö</button><button>ä</button>
+            </div>
+            <div>
+                <button>y</button><button>x</button><button>c</button><button>v</button><button>b</button><button>n</button><button>m</button>
+            </div>
+        </div>
+
+
+        <p>
+            Schwierigkeitsgrad: <select id="difficulties"></select>
         </p>
-        <div id="message"></div>
 
 <div id="help">
 -----------------------------------
-
 a-z       : Buchstaben wählen
 ?         : Tipp
 Leertaste : Neues Spiel
-
 -----------------------------------
-
+ß = ss
+-----------------------------------
 <i><span id="n-words"></span> Verben und Nomen geladen.</i>
 </div>
 
-        <input type="text" id="virtual-input" />
 
     </div>
 </body>

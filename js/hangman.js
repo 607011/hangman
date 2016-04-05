@@ -1,7 +1,7 @@
 ﻿var Hangman = (function ($, window) {
     'use strict';
 
-    var AllowedChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß'];
+    var AllowedChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ö', 'ü'];
     var wordsByDifficulty = [];
     var difficulty = 5;
     var minDifficulty;
@@ -14,6 +14,11 @@
     var MaxMistakes = 7;
     var cheated = false;
     var endOfGame = false;
+
+
+    function showMessageContainer() {
+        $('#message-container').removeClass('invisible');
+    }
 
 
     function flash() {
@@ -40,6 +45,7 @@
         if (mistakes === MaxMistakes) {
             endOfGame = true;
             msgEl.text('Du hast verloren! Das gesuchte Wort war "' + word + '".');
+            showMessageContainer();
         }
         else {
             if (guessed.indexOf('_') < 0) {
@@ -47,8 +53,38 @@
                 msgEl.addClass('won').text(cheated
                     ? 'Geschafft! Das nächste Mal kriegst du es ohne Hilfe hin, oder?'
                     : 'Yay! - Du hast gewonnen!');
+                showMessageContainer();
             }
         }
+    }
+
+
+    function selectChar(c) {
+        if (wordChars.indexOf(c) >= 0) {
+            if (selectedChars.indexOf(c) < 0) {
+                selectedChars.push(c);
+                keyButton(c).addClass('good');
+            }
+        }
+        else {
+            if (badChars.indexOf(c) < 0) {
+                badChars.push(c);
+                ++mistakes;
+                keyButton(c).addClass('bad');
+                flash();
+            }
+        }
+        update();
+    }
+
+
+    function keyButton(c) {
+        return $('#virtual-keyboard button:contains("' + c + '")');
+    }
+
+
+    function pressVirtualKey(c) {
+        keyButton(c).click();
     }
 
 
@@ -60,26 +96,17 @@
         else if (!endOfGame) {
             if (c === '?') {
                 cheated = true;
-                c = wordChars.find(function(wc) {
+                c = wordChars.find(function (wc) {
                     return selectedChars.indexOf(wc) < 0;
                 });
             }
-            if (AllowedChars.indexOf(c) >= 0) {
-                if (wordChars.indexOf(c) >= 0) {
-                    if (selectedChars.indexOf(c) < 0) {
-                        selectedChars.push(c);
-                    }
-                }
-                else {
-                    if (badChars.indexOf(c) < 0) {
-                        badChars.push(c);
-                        ++mistakes;
-                        flash();
-                    }
-                }
-                update();
-            }
+            pressVirtualKey(c);
         }
+    }
+
+
+    function keyClicked() {
+        selectChar($(this).text());
     }
 
 
@@ -91,7 +118,8 @@
         mistakes = 0;
         endOfGame = false;
         cheated = false;
-        $('#message').removeClass('won').empty();
+        $('#message').empty();
+        $('#message-container').removeClass().addClass('invisible');
         $('[id^=mistake-]').addClass('invisible');
         $('#bad-characters').text('bislang keine ;-)');
         var dIdx = difficulty - 1 + minDifficulty;
@@ -104,12 +132,15 @@
             $('#word').addClass('noun');
             $('#bad-characters').addClass('noun');
         }
+        $('#virtual-keyboard button').removeClass();
         update();
     }
 
 
     function wordsLoaded(data) {
-        var words = data.split("\n");
+        var words = data.split("\n").map(function (word) {
+            return word.replace('ß', 'ss');
+        });
         $('#n-words').text(words.length);
         var histo = {};
         var nChars = 0;
@@ -156,12 +187,15 @@
 
 
     function doInit() {
-        console.log("%c c't %c Hangman v1.0.4", 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
+        console.log("%c c't %c Hangman v1.0.5", 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
         console.log("%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG.\nAlle Rechte vorbehalten.", 'color: #1358A3; font-weight: bold;');
         $(window).on({
             keypress: onKeyPressed
         });
-        $('#virtual-input').focus();
+        $('#virtual-keyboard button').click(keyClicked);
+        $('#message-container').click(function () {
+            newGame(difficulty);
+        });
         $.ajax({
             url: 'data/de-alle.txt',
             method: 'GET',

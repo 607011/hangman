@@ -19,29 +19,29 @@
 body {
     background-color: #222;
     color: #999;
-    padding: 12pt;
-    font-size: 12pt;
+    font-size: 14px;
 }
 
 h1 {
     color: #ccc;
     text-transform: uppercase;
-    font-size: 26pt;
+    font-size: 33px;
     letter-spacing: 0.05em;
 }
 
 p {
-    margin-top: 12pt;
+    margin-top: 8px;
 }
 
 #main {
     margin: 0 auto;
-    width: 320px;
+    position: relative;
+    padding: 8px;
+    max-width: 640px;
 }
 
 #playground {
-    margin-top: 24pt;
-    margin-bottom: 24pt;
+    margin: 8px 0;
     color: #ddd;
 }
 
@@ -59,17 +59,66 @@ p {
     text-transform: lowercase;
 }
 
-#message {
-    margin-top: 12pt;
-    margin-bottom: 12pt;
+#virtual-keyboard {
+    margin: 6pt 0;
 }
 
-#bad-characters {
-    color: #666;
+#virtual-keyboard > div {
+    line-height: 20px;
+}
+
+#virtual-keyboard > div:nth-child(2) {
+    margin-left: 1%;
+}
+
+#virtual-keyboard > div:nth-child(3) {
+    margin-left: 2%;
+}
+
+#virtual-keyboard button {
+    display: inline-block;
+    text-transform: uppercase;
+    border: 1px solid #666;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin: 1px 1px 0 0;
+    width: 8%;
+    min-height: 22px;
+    background-color: #ddd;
+    color: #333;
+    font-weight: bold;
+    max-width: 44px;
+    max-height: 44px;
+}
+
+#virtual-keyboard button.good {
+    background-color: #0e0;
+}
+
+#virtual-keyboard button.bad {
+    background-color: #c00;
+}
+
+#message-container {
+    margin-bottom: 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    background-color: rgba(0,0,0,0.8);
+}
+
+#message {
+    margin: 15% auto;
+    font-size: 22px;
+    max-width: 640px;
+    padding: 2em;
 }
 
 button {
-    padding: 4pt 8pt;
+    padding: 4px 8px;
     font-weight: bold;
 }
 
@@ -78,6 +127,8 @@ td[id^=mistake-] {
 }
 
 .invisible {
+    transition: opacity 1250ms;
+    opacity: 0;
     visibility: hidden;
 }
 
@@ -86,9 +137,9 @@ td[id^=mistake-] {
 }
 
 #help {
-    margin-top: 32pt;
+    margin-top: 8px;
     white-space: pre;
-    font-size: 8pt;
+    font-size: 11px;
 }
 
 .flash {
