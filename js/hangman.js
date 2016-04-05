@@ -167,7 +167,7 @@
             method: 'GET',
             type: 'text/plain',
             success: wordsLoaded
-        })
+        });
     }
 
     return {
