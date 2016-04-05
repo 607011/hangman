@@ -1,25 +1,30 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <title>Galgenmännchen</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" /> 
     <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-language" content="de" />
     <link rel="icon" type="image/png" href="img/favicon.png" />
     <link rel="stylesheet" href="css/default.css" />
     <script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
     <script type="text/javascript" src="js/hangman.js"></script>
+    <title>Galgenmännchen</title>
 </head>
 <body>
     <div id="main">
         <h1>Galgenmännchen</h1>
         Schwierigkeitsgrad: <select id="difficulties"></select>
         <table id="playground">
-            <tr><td> </td><td>+</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>+</td><td>-</td><td>-</td><td> </td></tr>
-            <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-1">|</td><td> </td><td> </td><td> </td></tr>
-            <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-2">O</td><td> </td><td> </td><td> </td></tr>
-            <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-4">/</td><td class="invisible" id="mistake-3">|</td><td class="invisible" id="mistake-5">\</td><td> </td><td> </td></tr>
-            <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-6">/</td><td> </td><td class="invisible" id="mistake-7">\</td><td> </td><td> </td></tr>
-            <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-            <tr><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+            <tbody>
+                <tr><td> </td><td>+</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>+</td><td>-</td><td>-</td><td> </td></tr>
+                <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-1">|</td><td> </td><td> </td><td> </td></tr>
+                <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-2">O</td><td> </td><td> </td><td> </td></tr>
+                <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-4">/</td><td class="invisible" id="mistake-3">|</td><td class="invisible" id="mistake-5">\</td><td> </td><td> </td></tr>
+                <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-6">/</td><td> </td><td class="invisible" id="mistake-7">\</td><td> </td><td> </td></tr>
+                <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+                <tr><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+            </tbody>
         </table>
         <p>
             <span id="word-type"></span>?
