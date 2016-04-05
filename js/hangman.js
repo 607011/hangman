@@ -47,7 +47,7 @@
             if (guessed.indexOf('_') < 0) {
                 endOfGame = true;
                 msgEl.addClass('won').text(hinted
-                    ? 'Geschafft! Das nächste Mal schaffst du es ohne Hilfe, oder?'
+                    ? 'Geschafft! Das nächste Mal kriegst du es ohne Hilfe hin, oder?'
                     : 'Yay! - Du hast gewonnen!');
             }
         }
@@ -109,7 +109,7 @@
 
 
     function doInit() {
-        console.log("%c c't %c Hangman v1.0 BETA patch level 2", 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
+        console.log("%c c't %c Hangman v1.0 BETA patch level 3", 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
         console.log("%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG.\nAlle Rechte vorbehalten.", 'color: #1358A3; font-weight: bold;');
         $(window).on({
             keypress: onKeyPressed
@@ -138,18 +138,18 @@
                 minDifficulty = Number.MAX_VALUE;
                 maxDifficulty = Number.MIN_VALUE;
                 $.each(words, function (i, word) {
-                    var singleChars = [];
+                    var charset = [];
                     var allChars = word.split('');
                     $.each(allChars, function (i, c) {
-                        if (singleChars.indexOf(c) < 0) {
-                            singleChars.push(c);
+                        if (charset.indexOf(c) < 0) {
+                            charset.push(c);
                         }
                     });
                     var d = 0;
-                    $.each(singleChars, function (i, c) {
+                    $.each(charset, function (i, c) {
                         d += Math.exp(histo[c]);
                     });
-                    d = Math.floor(d * singleChars.length / allChars.length);
+                    d = Math.floor(d * charset.length / allChars.length / 3);
                     wordsByDifficulty[d] = wordsByDifficulty[d] || [];
                     wordsByDifficulty[d].push(word);
                     minDifficulty = Math.min(d, minDifficulty);
@@ -161,6 +161,7 @@
                 }
                 selectEl.change(function (e) {
                     newGame(parseInt($(this).val()) - minDifficulty + 1);
+		    $(this).blur();
                 });
                 selectEl.val(difficulty).change();
             }
