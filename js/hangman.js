@@ -6,7 +6,7 @@
         'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß'
     ];
     var wordsByDifficulty = [];
-    var difficulty = 10;
+    var difficulty = 5;
     var minDifficulty;
     var maxDifficulty;
     var word = undefined;
@@ -28,7 +28,7 @@
 
     function update() {
         var wordEl = $('#word');
-        var guessed = $.map(wordChars, function (c) {
+        var guessed = wordChars.map(function (c) {
             return selectedChars.indexOf(c) < 0
                 ? '_'
                 : c;
@@ -102,7 +102,8 @@
         $('[id^=mistake-]').addClass('invisible');
         $('#bad-characters').text('bislang keine ;-)');
         var dIdx = difficulty - 1 + minDifficulty;
-        word = wordsByDifficulty[dIdx][Math.floor(Math.random() * wordsByDifficulty[dIdx].length)];
+        var wIdx = Math.floor(Math.random() * wordsByDifficulty[dIdx].length)
+        word = wordsByDifficulty[dIdx][wIdx];
         wordChars = word.split('');
         update();
     }
@@ -122,11 +123,9 @@
                 var words = data.split("\n");
                 var histo = {};
                 var nChars = 0;
-                $.each(words, function (i, word) {
-                    $.each(word.split(''), function (i, c) {
-                        if (typeof histo[c] === 'undefined') {
-                            histo[c] = 0;
-                        }
+                words.forEach(function (word) {
+                    word.split('').forEach(function (c) {
+                        histo[c] = histo[c] || 0
                         ++histo[c];
                         ++nChars;
                     });
@@ -137,16 +136,16 @@
                 wordsByDifficulty = [];
                 minDifficulty = Number.MAX_VALUE;
                 maxDifficulty = Number.MIN_VALUE;
-                $.each(words, function (i, word) {
+                words.forEach(function (word) {
                     var charset = [];
                     var allChars = word.split('');
-                    $.each(allChars, function (i, c) {
+                    allChars.forEach(function (c) {
                         if (charset.indexOf(c) < 0) {
                             charset.push(c);
                         }
                     });
-                    var d = 0;
-                    $.each(charset, function (i, c) {
+                    var d = 0
+                    charset.forEach(function(c) {
                         d += Math.exp(histo[c]);
                     });
                     d = Math.floor(d * charset.length / allChars.length / 3);
@@ -157,11 +156,13 @@
                 });
                 var selectEl = $('#difficulties');
                 for (var i in wordsByDifficulty) {
-                    selectEl.append($('<option></option>').attr('value', i).text(i - minDifficulty + 1));
+                    selectEl.append($('<option></option>')
+                        .attr('value', i)
+                        .text(i - minDifficulty + 1));
                 }
                 selectEl.change(function (e) {
                     newGame(parseInt($(this).val()) - minDifficulty + 1);
-		    $(this).blur();
+                    $(this).blur();
                 });
                 selectEl.val(difficulty).change();
             }
