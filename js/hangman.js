@@ -15,7 +15,7 @@
     var badChars = [];
     var mistakes = 0;
     var MaxMistakes = 7;
-    var hinted = false;
+    var cheated = false;
     var endOfGame = false;
 
     function flash() {
@@ -46,7 +46,7 @@
         else {
             if (guessed.indexOf('_') < 0) {
                 endOfGame = true;
-                msgEl.addClass('won').text(hinted
+                msgEl.addClass('won').text(cheated
                     ? 'Geschafft! Das nächste Mal kriegst du es ohne Hilfe hin, oder?'
                     : 'Yay! - Du hast gewonnen!');
             }
@@ -58,7 +58,7 @@
         var c = String.fromCharCode(e.charCode).toLowerCase();
         if (!endOfGame) {
             if (c === '?') {
-                hinted = true;
+                cheated = true;
                 for (var i = 0; i < wordChars.length; ++i) {
                     if (selectedChars.indexOf(wordChars[i]) < 0) {
                         c = wordChars[i];
@@ -97,7 +97,7 @@
         badChars = [];
         mistakes = 0;
         endOfGame = false;
-        hinted = false;
+        cheated = false;
         $('#message').removeClass('won').empty();
         $('[id^=mistake-]').addClass('invisible');
         $('#bad-characters').text('bislang keine ;-)');
