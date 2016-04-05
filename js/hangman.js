@@ -161,6 +161,7 @@
         $(window).on({
             keypress: onKeyPressed
         });
+        $('#virtual-input').focus();
         $.ajax({
             url: 'data/de-alle.txt',
             method: 'GET',
