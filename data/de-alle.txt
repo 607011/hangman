@@ -10264,7 +10264,6 @@ Kennzahl
 Kennzeichen
 Kennzeichnung
 kentern
-Kentucky
 Keramik
 Kerbe
 kerben
@@ -10298,9 +10297,6 @@ keuchen
 Keule
 Keyboard
 Keyboarder
-Khan
-Khartum
-Khmer
 kichern
 Kicker
 Kid
@@ -10313,7 +10309,6 @@ Kies
 Kiew
 Kiez
 kiffen
-Kigali
 Killer
 Kilo
 Kilogramm
@@ -10366,18 +10361,15 @@ Kindesalter
 Kindesmissbrauch
 Kindheit
 King
-Kingston
 Kinn
 Kino
 Kinocenter
 Kinofilm
 Kinosaal
-Kinshasa
 Kiosk
 Kippe
 kippeln
 kippen
-Kirchdorf
 Kirche
 Kirchenasyl
 Kirchenchor
@@ -10398,12 +10390,10 @@ Kirchner
 Kirchplatz
 Kirchstraße
 Kirchturm
-Kirsch
 Kirsche
 Kissen
 Kiste
 Kita
-Kitas
 Kitsch
 Kitt
 Kittel
@@ -10493,7 +10483,6 @@ Kleinbetrieb
 Kleinbürger
 Kleinbus
 Kleine
-Kleinfeld
 Kleingarten
 Kleingärtner
 Kleingeld
@@ -10516,7 +10505,6 @@ Klerus
 Kletterer
 klettern
 Kletterwand
-Klezmer
 klicken
 Klient
 Klientel
@@ -10818,7 +10806,6 @@ Königsberg
 Königsfamilie
 Königshaus
 Königsklasse
-Königssee
 Königsweg
 konjugieren
 Konjunktur
@@ -10854,7 +10841,6 @@ Konsorte
 Konsortium
 konspirieren
 Konstante
-Konstantinopel
 Konstanz
 konstatieren
 Konstellation
