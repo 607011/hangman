@@ -3,8 +3,10 @@
 
     var Exclamations = ['Yay', 'Prima', 'Super', 'Klasse', 'Gratulation', 'Wouw', 'Toll', 'Dufte', 'Ausgezeichnet', 'Gewonnen'];
     var MaxMistakes = 7;
+    var FilesToLoad = 2;
 
     var allWords = [];
+    var markov = null;
     var word = undefined;
     var wordChars = [];
     var selectedChars = [];
@@ -12,6 +14,7 @@
     var mistakes = 0;
     var cheated = false;
     var endOfGame = false;
+    var filesLoaded = 0;
 
 
     function showMessageContainer() {
@@ -135,7 +138,16 @@
             $('#bad-characters').addClass('noun');
         }
         $('#virtual-keyboard button').removeClass();
+        $('#hint').empty();
         update();
+    }
+
+
+    function markovLoaded(data) {
+        markov = data;
+        if (++filesLoaded === FilesToLoad) {
+            newGame();
+        }
     }
 
 
@@ -144,7 +156,9 @@
             return word.replace('ß', 'ss');
         });
         $('#n-words').text(allWords.length);
-        newGame();
+        if (++filesLoaded === FilesToLoad) {
+            newGame();
+        }
     }
 
 
@@ -175,6 +189,12 @@
         });
         $('#message-container').click(function () {
             newGame();
+        });
+        $.ajax({
+            url: 'data/de-alle-prob.json',
+            method: 'GET',
+            type: 'text/json',
+            success: markovLoaded
         });
         $.ajax({
             url: 'data/de-alle.txt',
