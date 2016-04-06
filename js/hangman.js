@@ -19,6 +19,7 @@
 
     function showMessageContainer() {
         $('#message-container').removeClass('invisible');
+        $('#message').append('<p><button>Weiter</button></p>');
     }
 
 
@@ -50,14 +51,18 @@
         var msgEl = $('#message');
         if (mistakes === MaxMistakes) {
             endOfGame = true;
-            msgEl.html('Du hast leider verloren! Das gesuchte Wort war &ldquo;' + word + '&rdquo;.');
+            msgEl.html('<p>Du hast leider verloren!</p>' +
+                '<p>Das gesuchte Wort war &ldquo;' + word + '&rdquo;.</p>');
             showMessageContainer();
         }
         else if (guessed.indexOf('_') < 0) {
             endOfGame = true;
             msgEl.addClass('won').html(cheated
-                ? 'Geschafft! &ldquo;' + word + '&rdquo; ist das richtige Wort! Das nächste Mal bekommst du es ohne Hilfe hin, oder?'
-                : (Exclamations[Math.floor(Math.random()*Exclamations.length)]) + '! &ndash; &ldquo;' + word + '&rdquo; ist das richtige Wort!');
+                ? ('<p>Geschafft!</p>' +
+                  '<p>&ldquo;' + word + '&rdquo; ist das richtige Wort!</p>' +
+                  '<p>Das nächste Mal bekommst du es ohne Hilfe hin, oder?</p>')
+                : ('<p>' + (Exclamations[Math.floor(Math.random() * Exclamations.length)]) + '!</p>' +
+                  '<p>&ldquo;' + word + '&rdquo; ist das richtige Wort!</p>'));
             showMessageContainer();
         }
     }
@@ -191,7 +196,7 @@
 
 
     function newKeypressEvent(charCode) {
-        var e = jQuery.Event("keypress");
+        var e = jQuery.Event('keypress');
         e.keyCode = e.which = e.charCode = charCode;
         return e;
     }
@@ -203,8 +208,8 @@
 
 
     function doInit() {
-        console.log("%c c't %c Hangman v1.0.6", 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
-        console.log("%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG.\nAlle Rechte vorbehalten.", 'color: #1358A3; font-weight: bold;');
+        console.log('%c c\'t %c Hangman v1.0.7', 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
+        console.log('%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG. Alle Rechte vorbehalten.', 'color: #1358A3; font-weight: bold;');
         $(window).on({
             keypress: onKeyPressed
         });
