@@ -147,7 +147,7 @@
 
 
     function wordsLoaded(data) {
-        var words = data.split("\n").map(function (word) {
+        var words = data.split(/\r\n|\n|\r/).map(function (word) {
             return word.replace('ß', 'ss');
         });
         $('#n-words').text(words.length);
