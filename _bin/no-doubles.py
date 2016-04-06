@@ -7,4 +7,5 @@ words = set()
 for line in sys.stdin:
 	words.add(line.strip())
 
-print "\n".join(sorted(list(words)))
+print("\n".join(sorted(list(words))))
+
