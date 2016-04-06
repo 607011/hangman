@@ -154,6 +154,19 @@ footer {
     font-size: smaller;
 }
 
+a {
+    color: #eee;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:visited {
+    color: unset;
+}
+
 .flash {
     animation-duration: 100ms;
     animation-name: flash;
