@@ -17,7 +17,7 @@
 }
 
 body {
-    background-color: #222;
+    background-color: #1f1f1f;
     color: #999;
     font-size: 16px;
 }
@@ -65,15 +65,14 @@ p {
 }
 
 #virtual-keyboard > div {
-    line-height: 20px;
 }
 
 #virtual-keyboard > div:nth-child(2) {
-    margin-left: 1%;
+    margin-left: 10px;
 }
 
 #virtual-keyboard > div:nth-child(3) {
-    margin-left: 2%;
+    margin-left: 20px;
 }
 
 #virtual-keyboard button {
@@ -83,11 +82,12 @@ p {
     border-radius: 4px;
     padding: 2px 4px;
     margin: 1px 1px 0 0;
-    width: 8%;
-    min-height: 22px;
+    width: 44px;
+    height: 44px;
     background-color: #ddd;
     color: #333;
     font-weight: bold;
+    font-size: 22px;
     max-width: 44px;
     max-height: 44px;
 }
@@ -113,7 +113,7 @@ p {
 }
 
 #message {
-    margin: 15% auto;
+    margin: 5% auto;
     font-size: 24px;
     max-width: 640px;
     padding: 2em;
@@ -303,3 +303,28 @@ a:visited {
         background-color: #222;
     }
 }
+
+
+@media screen and (max-width: 540px) {
+
+    #virtual-keyboard > div:nth-child(2) {
+        margin-left: 5px;
+    }
+
+    #virtual-keyboard > div:nth-child(3) {
+        margin-left: 10px;
+    }
+
+    #virtual-keyboard button {
+        display: inline-block;
+        text-transform: uppercase;
+        border: 1px solid #666;
+        border-radius: 4px;
+        padding: 2px 4px;
+        margin: 1px 1px 0 0;
+        width: 8%;
+        height: unset;
+        font-size: 14px;
+    }
+}
+

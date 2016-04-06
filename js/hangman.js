@@ -4,10 +4,7 @@
     var Exclamations = ['Yay', 'Prima', 'Super', 'Klasse', 'Gratulation', 'Wouw', 'Toll', 'Dufte', 'Ausgezeichnet', 'Gewonnen'];
     var MaxMistakes = 7;
 
-    var wordsByDifficulty = [];
-    var difficulty = 5;
-    var minDifficulty;
-    var maxDifficulty;
+    var allWords = [];
     var word = undefined;
     var wordChars = [];
     var selectedChars = [];
@@ -100,7 +97,7 @@
     function onKeyPressed(e) {
         var c = String.fromCharCode(e.charCode).toLowerCase();
         if (c === ' ') {
-            newGame(difficulty);
+            newGame();
         }
         else if (!endOfGame) {
             if (c === '?') {
@@ -119,9 +116,7 @@
     }
 
 
-    function newGame(newDifficulty) {
-        difficulty = newDifficulty;
-        document.location.hash = '#difficulty=' + difficulty;
+    function newGame() {
         selectedChars = [];
         badChars = [];
         mistakes = 0;
@@ -131,9 +126,7 @@
         $('#message').empty();
         $('#message-container').removeClass().addClass('invisible');
         $('[id^=mistake-]').addClass('invisible');
-        var dIdx = difficulty - 1 + minDifficulty;
-        var wIdx = Math.floor(Math.random() * wordsByDifficulty[dIdx].length)
-        word = wordsByDifficulty[dIdx][wIdx];
+        word = allWords[Math.floor(Math.random() * allWords.length)];
         wordChars = word.toLowerCase().split('');
         $('#word').removeClass();
         $('#bad-characters').removeClass();
@@ -147,51 +140,11 @@
 
 
     function wordsLoaded(data) {
-        var words = data.split(/\r\n|\n|\r/).map(function (word) {
+        allWords = data.split(/\r\n|\n|\r/).map(function (word) {
             return word.replace('ß', 'ss');
         });
-        $('#n-words').text(words.length);
-        var histo = {};
-        var nChars = 0;
-        words.forEach(function (word) {
-            word.split('').forEach(function (c) {
-                histo[c] = histo[c] || 0
-                ++histo[c];
-                ++nChars;
-            });
-        });
-        wordsByDifficulty = [];
-        minDifficulty = Number.MAX_VALUE;
-        maxDifficulty = Number.MIN_VALUE;
-        words.forEach(function (word) {
-            var charset = [];
-            var allChars = word.split('');
-            allChars.forEach(function (c) {
-                if (charset.indexOf(c) < 0) {
-                    charset.push(c);
-                }
-            });
-            var d = charset.reduce(
-                function sumDifficulty(previousValue, currentValue) {
-                    return previousValue + Math.exp(1 - histo[currentValue] / nChars);
-                }, 0);
-            d = Math.floor(d * charset.length / allChars.length / 3);
-            wordsByDifficulty[d] = wordsByDifficulty[d] || [];
-            wordsByDifficulty[d].push(word);
-            minDifficulty = Math.min(d, minDifficulty);
-            maxDifficulty = Math.max(d, maxDifficulty);
-        });
-        var selectEl = $('#difficulties');
-        for (var i in wordsByDifficulty) {
-            selectEl.append($('<option></option>')
-                .attr('value', i)
-                .text(i - minDifficulty + 1));
-        }
-        selectEl.change(function (e) {
-            newGame(parseInt($(this).val()) - minDifficulty + 1);
-            $(this).blur();
-        });
-        selectEl.val(difficulty).change();
+        $('#n-words').text(allWords.length);
+        newGame();
     }
 
 
@@ -208,7 +161,7 @@
 
 
     function doInit() {
-        console.log('%c c\'t %c Hangman v1.0.7', 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
+        console.log('%c c\'t %c Hangman v1.0.8', 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
         console.log('%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG. Alle Rechte vorbehalten.', 'color: #1358A3; font-weight: bold;');
         $(window).on({
             keypress: onKeyPressed
@@ -221,7 +174,7 @@
             typeKey('?');
         });
         $('#message-container').click(function () {
-            newGame(difficulty);
+            newGame();
         });
         $.ajax({
             url: 'data/de-alle.txt',
