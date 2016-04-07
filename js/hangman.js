@@ -161,7 +161,7 @@
 
 
     function doInit() {
-        console.log('%c c\'t %c Hangman v1.0.8', 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
+        console.log('%c c\'t %c Hangman v1.0.9', 'background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;', 'background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;');
         console.log('%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG. Alle Rechte vorbehalten.', 'color: #1358A3; font-weight: bold;');
         $(window).on({
             keypress: onKeyPressed
