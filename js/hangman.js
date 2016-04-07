@@ -96,7 +96,7 @@
 
     function onKeyPressed(e) {
         var c = String.fromCharCode(e.charCode).toLowerCase();
-        if (c === ' ') {
+        if (c === ' ' || e.charCode === 13) {
             newGame();
         }
         else if (!endOfGame) {
