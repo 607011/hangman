@@ -1,4 +1,8 @@
-﻿var Hangman = (function ($, window) {
+//-*- coding: utf-8 -*-
+// Copyright (c) 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG
+// All rights reserved.
+
+var Hangman = (function ($, window) {
     'use strict';
 
     var Exclamations = ['Yay', 'Prima', 'Super', 'Klasse', 'Gratulation', 'Wouw', 'Toll', 'Dufte', 'Ausgezeichnet', 'Gewonnen'];
@@ -9,7 +13,7 @@
     var wordChars = [];
     var selectedChars = [];
     var badChars = [];
-    var mistakes = 0;
+    var nMistakes = 0;
     var cheated = false;
     var endOfGame = false;
 
@@ -44,9 +48,9 @@
                 : c;
         }).join('');
         wordEl.text(guessed);
-        $('#mistake-' + mistakes).removeClass('invisible');
+        $('#mistake-' + nMistakes).removeClass('invisible');
         var msgEl = $('#message');
-        if (mistakes === MaxMistakes) {
+        if (nMistakes === MaxMistakes) {
             endOfGame = true;
             msgEl.html('<p>Du hast leider verloren!</p>' +
                 '<p>Das gesuchte Wort war &ldquo;' + word + '&rdquo;.</p>');
@@ -75,7 +79,7 @@
         else {
             if (badChars.indexOf(c) < 0) {
                 badChars.push(c);
-                ++mistakes;
+                ++nMistakes;
                 keyButton(c).addClass('bad');
                 flash();
             }
@@ -119,7 +123,7 @@
     function newGame() {
         selectedChars = [];
         badChars = [];
-        mistakes = 0;
+        nMistakes = 0;
         endOfGame = false;
         cheated = false;
         microFlash();
