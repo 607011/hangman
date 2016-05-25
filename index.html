@@ -17,21 +17,23 @@
     </div>
     <div id="main">
         <h1>Galgenmännchen</h1>
-        <table id="playground">
-            <tbody>
-                <tr><td> </td><td>+</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>+</td><td>-</td><td>-</td><td> </td></tr>
-                <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-1">|</td><td> </td><td> </td><td> </td></tr>
-                <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-2">O</td><td> </td><td> </td><td> </td></tr>
-                <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-4">/</td><td class="invisible" id="mistake-3">|</td><td class="invisible" id="mistake-5">\</td><td> </td><td> </td></tr>
-                <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-6">/</td><td> </td><td class="invisible" id="mistake-7">\</td><td> </td><td> </td></tr>
-                <tr><td> </td><td>|</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-                <tr><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-            </tbody>
-        </table>
-        <p id="word-container">
-            ?
-            <span id="word"></span>
-        </p>
+        <div id="playground">
+            <table>
+                <tbody>
+                    <tr><td> </td><td>&#x2553;</td><td>&#x2500;</td><td>&#x2500;</td><td>&#x2500;</td><td>&#x2500;</td><td>&#x2500;</td><td>&#x252C;</td><td>&#x2500;</td><td>&#x2500;</td><td> </td></tr>
+                    <tr><td> </td><td>&#x2551;</td><td> </td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-1">&#x2502;</td><td> </td><td> </td><td> </td></tr>
+                    <tr><td> </td><td>&#x2551;</td><td> </td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-2">&#x25CB;</td><td> </td><td> </td><td> </td></tr>
+                    <tr><td> </td><td>&#x2551;</td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-4">/</td><td class="invisible" id="mistake-3">&#x2502;</td><td class="invisible" id="mistake-5">\</td><td> </td><td> </td></tr>
+                    <tr><td> </td><td>&#x2551;</td><td> </td><td> </td><td> </td><td> </td><td class="invisible" id="mistake-6">/</td><td> </td><td class="invisible" id="mistake-7">\</td><td> </td><td> </td></tr>
+                    <tr><td> </td><td>&#x2551;</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+                    <tr><td>&#x2588;</td><td>&#x2588;</td><td>&#x2588;</td><td>&#x2588;</td><td>&#x2588;</td><td>&#x2588;</td><td>&#x2588;</td><td>&#x2588;</td><td>&#x2588;</td><td>&#x2588;</td><td>&#x2588;</td></tr>
+                </tbody>
+            </table>
+            <div id="word-container">
+                ?
+                <span id="word"></span>
+            </div>
+        </div>
 
         <div id="virtual-keyboard">
             <div>
@@ -45,18 +47,17 @@
             </div>
         </div>
 
-
-        <p>
-            <button id="hint-button" style="cursor: help;" title="Tipp geben">?</button>
+        <div>
+            <button id="hint-button" title="Tipp geben">?</button>
             <button id="new-button" title="Neues Spiel beginnen">Neu</button>
-        </p>
+            <button id="ernstl">e r n s t l</button>
+        </div>
 
-<div id="help">
-<i><span id="n-words"></span> Verben und Substantive</i>
-</div>
+        <div id="help">
+            <i><span id="n-words"></span> Verben und Substantive</i>
+        </div>
 
-
-    <footer>Copyright &copy; 2016 <a href="mailto:ola@ct.de">Oliver Lau</a>, <a href="http://www.heise.de/" target="_blank">Heise Medien GmbH &amp; Co. KG</a>. All rights reserved.</footer>
+        <footer>Copyright &copy; 2016 <a href="mailto:ola@ct.de">Oliver Lau</a>, <a href="http://www.heise.de/" target="_blank">Heise Medien GmbH &amp; Co. KG</a>. All rights reserved.</footer>
 
     </div>
 </body>
