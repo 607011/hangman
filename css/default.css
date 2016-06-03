@@ -35,9 +35,7 @@ p {
 }
 
 #main {
-  position: relative;
   padding: 8px;
-  margin: 0 auto;
 }
 
   #main div:nth-child(4), div:nth-child(5), footer {
@@ -109,14 +107,6 @@ button {
     text-shadow: 0 1px 3px white;
   }
 
-  button#ernstl {
-    width: auto;
-    max-width: unset;
-    margin-left: 2em;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
 #virtual-keyboard {
   margin: 12px auto;
   display: table;
@@ -157,6 +147,16 @@ button {
     #virtual-keyboard button.bad {
       background-color: #c00;
     }
+
+    #virtual-keyboard button.ernstl {
+      width: auto;
+      max-width: unset;
+      margin-left: 1em;
+      letter-spacing: 0.2em;
+      padding-left: 10px;
+      padding-right: 7px;
+    }
+
 
 #message-container {
   margin-bottom: 12px;
