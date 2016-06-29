@@ -132,7 +132,7 @@ var Hangman = (function ($, window) {
     nMistakes = 0;
     endOfGame = false;
     cheated = false;
-    word = allWords[Math.floor(Math.random() * allWords.length)];
+    word = allWords[Math.floor(Math.random() * allWords.length)].word;
     wordChars = word.toLowerCase().split("");
     $("#word").removeClass();
     if (word[0].toUpperCase() === word[0]) {
@@ -151,12 +151,54 @@ var Hangman = (function ($, window) {
 
   function wordsLoaded(data) {
     allWords = data.split(/\r\n|\n|\r/).map(function (word) {
-      return word.replace("ß", "ss");
+      word = word.replace("ß", "ss");
+      return {word: word, level: wordLevel(word)};
     });
     $("#n-words").text(allWords.length);
     newGame();
   }
 
+  function wordLevel(word) {
+    var value = {"a": 5,"b": 11,"c": 9,"d": 6,"e": 1,"f": 11,"g": 9,"h": 7,"i": 4,"j": 13,"k": 11,"l": 9,"m": 10,"n": 3,"o": 10,"p": 13,"q": 15,"r": 4,"s": 4,"t": 5,"u": 6,"v": 13,"w": 11,"x": 15,"y": 15,"z": 11,"ä": 5,"ö": 5,"ü": 5};
+    var wordValue = 0;
+    var chars = new Array();
+    word = word.toLowerCase();
+    word = word.split("");
+    for(var i=0;i<word.length;i++){
+      wordValue = wordValue + value[word[i]];
+      var pos = 0;
+      if(jQuery.inArray(word[i],chars)==-1){
+        chars.push(word[i]);
+      }
+    }
+    if(chars.length<4){
+      wordValue = wordValue + 5;
+    }
+    else if(chars.length<7){
+      wordValue = wordValue + 50;
+    }
+    else if(chars.length<10){
+      wordValue = wordValue + 100;
+    }
+    else{
+      wordValue = wordValue + 150;
+    }
+    if(wordValue<50){
+      return 1;
+    }
+    else if(wordValue<100){
+      return 2;
+    }
+    else if(wordValue<190){
+      return 3;
+    }
+    else if(wordValue<280){
+      return 4;
+    }
+    else{
+      return 5;
+    }
+  }
 
   function newKeypressEvent(charCode) {
     var e = $.Event("keypress");
