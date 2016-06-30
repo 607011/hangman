@@ -70,7 +70,9 @@ var Hangman = (function ($, window) {
 
 
   function keyButton(c) {
-    var erg = $("#virtual-keyboard button:contains('" + c + "')");
+    var erg = $("#virtual-keyboard button").filter(function(){
+      return $.trim($(this).text()).toLowerCase() == c.toLowerCase();
+    });
     console.log(erg);
     return erg;
   }
