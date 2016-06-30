@@ -70,7 +70,9 @@ var Hangman = (function ($, window) {
 
 
   function keyButton(c) {
-    return $("#virtual-keyboard button:contains('" + c + "')");
+    var erg = $("#virtual-keyboard button:contains('" + c + "')");
+    console.log(erg);
+    return erg;
   }
 
 
@@ -103,6 +105,12 @@ var Hangman = (function ($, window) {
     });
   }
 
+  function onLevelButton() {
+    console.log($(this).text());
+    location.hash="#Level-"+$(this).text();
+    showLevel();
+    newGame();
+  }
 
   function pressVirtualKey(c) {
     keyButton(c).click();
@@ -132,7 +140,10 @@ var Hangman = (function ($, window) {
     nMistakes = 0;
     endOfGame = false;
     cheated = false;
-    word = allWords[Math.floor(Math.random() * allWords.length)].word;
+    do{
+      word = allWords[Math.floor(Math.random() * allWords.length)]
+    }while (word.level!=location.hash.replace("#Level-",""));
+    word = word.word;
     wordChars = word.toLowerCase().split("");
     $("#word").removeClass();
     if (word[0].toUpperCase() === word[0]) {
@@ -148,6 +159,16 @@ var Hangman = (function ($, window) {
     update();
   }
 
+  function showLevel(){
+    for(var i=1;i<6;i++){
+      if(i<=location.hash.replace("#Level-","")){
+        $("#level #"+i).addClass("active");
+      }
+      else{
+        $("#level #"+i).removeClass("active");
+      }
+    }
+  }
 
   function wordsLoaded(data) {
     allWords = data.split(/\r\n|\n|\r/).map(function (word) {
@@ -215,6 +236,11 @@ var Hangman = (function ($, window) {
   function doInit() {
     console.log("%c c't %c Hangman v1.0.10", "background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;", "background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;");
     console.log("%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG. Alle Rechte vorbehalten.", "color: #1358A3; font-weight: bold;");
+    if(!location.hash.match(/Level\-[1-5]/)){
+      console.log(location.hash);
+      location.hash = "#Level-1";
+    }
+    showLevel();
     $(window).on({
       keypress: onKeyPressed
     });
@@ -227,6 +253,7 @@ var Hangman = (function ($, window) {
       simulateKeyPress("?");
     });
     $("#message-container").click(newGame);
+    $("#level button").click(onLevelButton);
     $.ajax({
       url: "data/de-alle.txt",
       method: "GET",
