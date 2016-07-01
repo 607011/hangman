@@ -7,7 +7,10 @@ var Hangman = (function ($, window) {
 
   var Exclamations = ["Yay", "Prima", "Super", "Klasse", "Gratulation", "Wouw", "Toll", "Dufte", "Ausgezeichnet", "Gewonnen"];
   var MaxMistakes = 7;
-
+  var LetterValue = { "a": 5, "b": 11, "c": 9, "d": 6, "e": 1, "f": 11, "g": 9, "h": 7, "i": 4, "j": 13, "k": 11, "l": 9, "m": 10, "n": 3, "o": 10, "p": 13, "q": 15, "r": 4, "s": 4, "t": 5, "u": 6, "v": 13, "w": 11, "x": 15, "y": 15, "z": 11, "ä": 5, "ö": 5, "ü": 5 };
+  var WordValueThresholds = [50, 100, 190, 280];
+  var ReLevelHash = new RegExp("Level\-[1-" + (WordValueThresholds + 1) + "]");
+  
   var allWords = [];
   var word = undefined;
   var wordChars = [];
@@ -70,7 +73,10 @@ var Hangman = (function ($, window) {
 
 
   function keyButton(c) {
-    return $("#virtual-keyboard button:contains('" + c + "')");
+    var erg = $("#virtual-keyboard button").filter(function(){
+      return $.trim($(this).text()).toLowerCase() === c.toLowerCase();
+    });
+    return erg;
   }
 
 
@@ -103,6 +109,11 @@ var Hangman = (function ($, window) {
     });
   }
 
+  function onLevelButton() {
+    location.hash = "#Level-" + $(this).text();
+    showLevel();
+    newGame();
+  }
 
   function pressVirtualKey(c) {
     keyButton(c).click();
@@ -132,7 +143,10 @@ var Hangman = (function ($, window) {
     nMistakes = 0;
     endOfGame = false;
     cheated = false;
-    word = allWords[Math.floor(Math.random() * allWords.length)];
+    do {
+      word = allWords[Math.floor(Math.random() * allWords.length)]
+    } while (word.level != location.hash.replace("#Level-", ""));
+    word = word.word;
     wordChars = word.toLowerCase().split("");
     $("#word").removeClass();
     if (word[0].toUpperCase() === word[0]) {
@@ -148,15 +162,57 @@ var Hangman = (function ($, window) {
     update();
   }
 
+  function showLevel() {
+    for (var i = 1; i < WordValueThresholds.length + 2; ++i) {
+      if (i <= location.hash.replace("#Level-", "")) {
+        $("#level #" + i).addClass("active");
+      }
+      else {
+        $("#level #" + i).removeClass("active");
+      }
+    }
+  }
 
   function wordsLoaded(data) {
     allWords = data.split(/\r\n|\n|\r/).map(function (word) {
-      return word.replace("ß", "ss");
+      word = word.replace("ß", "ss");
+      return { word: word, level: wordLevel(word) };
     });
     $("#n-words").text(allWords.length);
     newGame();
   }
 
+  function wordLevel(word) {
+    var i, pos;
+    var wordValue = 0;
+    var chars = [];
+    word = word.toLowerCase();
+    word = word.split("");
+    for (i = 0; i < word.length; ++i){
+      wordValue = wordValue + LetterValue[word[i]];
+      pos = 0;
+      if (jQuery.inArray(word[i],chars) === -1) {
+        chars.push(word[i]);
+      }
+    }
+    if (chars.length < 4) {
+      wordValue = wordValue + 5;
+    }
+    else if (chars.length < 7) {
+      wordValue = wordValue + 50;
+    }
+    else if (chars.length < 10) {
+      wordValue = wordValue + 100;
+    }
+    else {
+      wordValue = wordValue + 150;
+    }
+    for (i = 0; i < WordValueThresholds.length; ++i) {
+      if (wordValue < WordValueThresholds[i])
+        return i + 1;
+    }
+    return i + 1;
+  }
 
   function newKeypressEvent(charCode) {
     var e = $.Event("keypress");
@@ -173,6 +229,10 @@ var Hangman = (function ($, window) {
   function doInit() {
     console.log("%c c't %c Hangman v1.0.10", "background-color: #1358A3; color: white; font-weight: bold; font-style: italic; font-size: 150%;", "background-color: white; color: #1358A3; font-weight: bold; font-size: 150%;");
     console.log("%cCopyright © 2016 Oliver Lau <ola@ct.de>, Heise Medien GmbH & Co. KG. Alle Rechte vorbehalten.", "color: #1358A3; font-weight: bold;");
+    if (!location.hash.match(ReLevelHash)) {
+      location.hash = "#Level-1";
+    }
+    showLevel();
     $(window).on({
       keypress: onKeyPressed
     });
@@ -185,6 +245,7 @@ var Hangman = (function ($, window) {
       simulateKeyPress("?");
     });
     $("#message-container").click(newGame);
+    $("#level button").click(onLevelButton);
     $.ajax({
       url: "data/de-alle.txt",
       method: "GET",

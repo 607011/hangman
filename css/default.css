@@ -38,9 +38,32 @@ p {
   padding: 8px;
 }
 
-  #main div:nth-child(4), div:nth-child(5), footer {
+  #main div, #main footer {
     display: table;
-    margin: 0 auto;
+    /*text-align: center;*/
+    margin: 5px auto;
+  }
+
+#level button {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.level, .level:hover{
+  background-color: transparent;
+  background-image: url(../img/level.png);
+  background-size: 100% auto;
+  color: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+  .level.active{
+    background-image: url(../img/level-active.png);
+  }
+
+  .level:hover, .level:hover.active{
+    background-image: url(../img/level-hover.png);
   }
 
 #playground {
