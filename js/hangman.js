@@ -144,8 +144,10 @@ var Hangman = (function ($, window) {
     endOfGame = false;
     cheated = false;
     do {
-      word = allWords[Math.floor(Math.random() * allWords.length)]
-    } while (word.level != location.hash.replace("#Level-", ""));
+      var number = Math.floor(Math.random() * allWords.length);
+      word = allWords[number];
+      console.log(word.level);
+    } while (word.level.level != location.hash.replace("#Level-", ""));
     word = word.word;
     wordChars = word.toLowerCase().split("");
     $("#word").removeClass();
@@ -178,40 +180,36 @@ var Hangman = (function ($, window) {
       word = word.replace("ß", "ss");
       return { word: word, level: wordLevel(word) };
     });
+    //console.log(allWords);
     $("#n-words").text(allWords.length);
     newGame();
   }
 
   function wordLevel(word) {
-    var i, pos;
+    var i, x;
+    var level = 0;
     var wordValue = 0;
     var chars = [];
-    word = word.toLowerCase();
+    //console.log(WordValueThresholds.length);
     word = word.split("");
     for (i = 0; i < word.length; ++i){
-      wordValue = wordValue + LetterValue[word[i]];
-      pos = 0;
+
       if (jQuery.inArray(word[i],chars) === -1) {
         chars.push(word[i]);
+        wordValue = wordValue + LetterValue[word[i]];
       }
     }
-    if (chars.length < 4) {
-      wordValue = wordValue + 5;
+    x = (word.length + chars.length*2) / 3;
+    wordValue = wordValue * ((2.84138*Math.pow(10,-4)*Math.pow(x,4))+(-0.0174815347*Math.pow(x,3))+(0.3999311992*Math.pow(x,2))+(-4.118219251*x)+(16.93973598));
+    for (i = 0; i < WordValueThresholds.length; i++) {
+      if (Math.round(wordValue) > WordValueThresholds[i]) {
+        level = i + 2;
+      }
     }
-    else if (chars.length < 7) {
-      wordValue = wordValue + 50;
+    if(level==0) {
+      level = 1;
     }
-    else if (chars.length < 10) {
-      wordValue = wordValue + 100;
-    }
-    else {
-      wordValue = wordValue + 150;
-    }
-    for (i = 0; i < WordValueThresholds.length; ++i) {
-      if (wordValue < WordValueThresholds[i])
-        return i + 1;
-    }
-    return i + 1;
+    return {value: wordValue, chars: chars, level: level, x: x};
   }
 
   function newKeypressEvent(charCode) {
