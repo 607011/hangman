@@ -8,7 +8,7 @@ var Hangman = (function ($, window) {
   var Exclamations = ["Yay", "Prima", "Super", "Klasse", "Gratulation", "Wouw", "Toll", "Dufte", "Ausgezeichnet", "Gewonnen"];
   var MaxMistakes = 7;
   var LetterValue = { "a": 5, "b": 11, "c": 9, "d": 6, "e": 1, "f": 11, "g": 9, "h": 7, "i": 4, "j": 13, "k": 11, "l": 9, "m": 10, "n": 3, "o": 10, "p": 13, "q": 15, "r": 4, "s": 4, "t": 5, "u": 6, "v": 13, "w": 11, "x": 15, "y": 15, "z": 11, "ä": 5, "ö": 5, "ü": 5 };
-  var WordValueThresholds = [50, 100, 190, 280];
+  var WordValueThresholds = [25, 75, 100, 125];
   var ReLevelHash = new RegExp("Level\-[1-" + (WordValueThresholds + 1) + "]");
   
   var allWords = [];
@@ -146,7 +146,6 @@ var Hangman = (function ($, window) {
     do {
       var number = Math.floor(Math.random() * allWords.length);
       word = allWords[number];
-      console.log(word.level);
     } while (word.level.level != location.hash.replace("#Level-", ""));
     word = word.word;
     wordChars = word.toLowerCase().split("");
